@@ -2,6 +2,13 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
-  get('/') {"Hello and Welcome!!!"}
+  configure do
+    set :public_folder, 'public'
+    set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "secret_supper"
+  end
+
+  get('/') {erb :index}
 
 end

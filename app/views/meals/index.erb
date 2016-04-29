@@ -1,0 +1,18 @@
+
+
+<% User.all.each do |user| %>
+  <% user.meals.each do |meal| %>
+  <h3><%= meal.name %></h3>
+  <h4><%= meal.user.username%></h4>
+  <% meal.ingredients.each do |ingredient| %>
+      <ul>
+        <li><%= ingredient.name%></li>
+      </ul>
+    <% end %>
+  <% end %>
+  <% end %>
+
+
+
+
+  
