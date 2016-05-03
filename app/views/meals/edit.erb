@@ -1,0 +1,31 @@
+<form action="/meals/<%=@meal.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label>Meal Name:</label>
+  <input type="text" name="meal[name]" value="<%= @meal.name %>"></input>
+  <br>
+  <%@meal.ingredients.uniq.each do |ingredient|%>
+    <label><%=ingredient.name%>: <input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>" checked="checked"></label>
+  <%end%>
+  <br>
+  <h3>Choose from Existing Ingredients:</h3>
+  <ul>
+  <%Ingredient.all.sort.each do |ingredient|%>
+    <li><label><%=ingredient.name.titleize%>: <input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"></label></li>
+  <%end%>
+  </ul>
+<!--   <label>Ingredient: <input type="text" name="ingredient[name_1]" value=""></label>
+  <label>Ingredient: <input type="text" name="ingredient[name_2]" value=""></label>
+  <label>Ingredient: <input type="text" name="ingredient[name_3]" value=""></label>
+  <label>Ingredient: <input type="text" name="ingredient[name_4]" value=""></label>
+  <label>Ingredient: <input type="text" name="ingredient[name_5]" value=""></label> -->
+  <br>
+  <label>Create New Ingredients (one per line): <br><textarea type="text" name="ingredient[text_area]" value=""></textarea></label><br>
+  <label>Description: <br><textarea type="text" name="meal[description]" value=""></textarea></label>
+  <br>
+  <input type="submit" id="submit" value="submit">
+</form>
+<br>
+<form action="/meals/<%=@meal.id%>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" id="Delete Meal" value="Delete Meal">
+</form>

@@ -20,6 +20,8 @@ GEM
     builder (3.2.2)
     coderay (1.1.1)
     daemons (1.2.3)
+    deep_cloneable (2.2.0)
+      activerecord (>= 3.1.0, < 5.0.0)
     eventmachine (1.2.0.1)
     i18n (0.7.0)
     json (1.8.3)
@@ -76,6 +78,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   bcrypt
+  deep_cloneable (~> 2.2.0)
   pry
   rake
   require_all

@@ -1,0 +1,15 @@
+<h2><%= @meal.name.titleize %></h2>
+<p>Created By: <%=@meal.username.titleize%></p>
+<p>Updated: <%=@meal.updated_at.strftime("%A, %B %d, %Y")%></p>
+<% @meal.ingredients.uniq.each do |ingredient| %>
+  <ul>
+    <li><%= ingredient.name.titleize%></li>
+  </ul>
+<% end %>
+<p><%= @meal.description %></p>
+<% if editable? %>
+<a href="/meals/<%=@meal.id%>/edit">Edit Meal</a>
+<%end%>
+<% if logged_in?%>
+  <a href="/meals/<%=@meal.id%>/duplicate">Duplicate Meal</a>
+  <%end%>

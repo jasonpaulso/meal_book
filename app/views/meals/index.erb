@@ -1,16 +1,11 @@
 
+<%Meal.order("updated_at DESC").each do |meal|%>
+  <h3><a href="\meals\<%=meal.id%>"><%= meal.name.titleize %></a></h3>
+    by <%=meal.username.titleize%>
+    <br>
+    updated: <%=meal.updated_at.strftime("%A, %B %d, %Y")%>
+  <%end%>
 
-<% User.all.each do |user| %>
-  <% user.meals.each do |meal| %>
-  <h3><%= meal.name %></h3>
-  <h4><%= meal.user.username%></h4>
-  <% meal.ingredients.each do |ingredient| %>
-      <ul>
-        <li><%= ingredient.name%></li>
-      </ul>
-    <% end %>
-  <% end %>
-  <% end %>
 
 
 

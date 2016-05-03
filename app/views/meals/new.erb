@@ -1,1 +1,14 @@
-<p>Wanna add a new meal?</p>
+<h2>Wanna add a new meal?</h2>
+<form action="/meals" method="POST" accept-charset="utf-8">
+  <label>Meal Name: <input type="text" name="meal[name]" value=""></label>
+  <h3>Choose from Existing Ingredients:</h3>
+  <ul>
+  <%Ingredient.all.sort.each do |ingredient|%>
+    <li><label><%=ingredient.name.titleize%>: <input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"></label></li>
+  <%end%>
+  </ul>
+  <label>Create New Ingredients (one per line): <br><textarea type="text" name="ingredient[text_area]" value=""></textarea></label><br>
+  <label>Description: <br><textarea type="text" name="meal[description]" value=""></textarea></label>
+  <br>
+  <input type="submit" value="submit">
+</form>

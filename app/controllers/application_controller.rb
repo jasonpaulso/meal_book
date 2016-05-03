@@ -1,6 +1,6 @@
-require './config/environment'
-
 class ApplicationController < Sinatra::Base
+  helpers MealsController::MealHelpers
+  helpers UsersController::UserHelpers
 
   configure do
     set :public_folder, 'public'
@@ -9,6 +9,16 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "secret_supper"
   end
 
-  get('/') {erb :index}
+  helpers do 
+    def set_title
+      @title ||= "MealBook"
+    end
+  end
+
+  before do
+    set_title
+  end
+
+  get('/') {@title = "Home"; erb :index}
 
 end
