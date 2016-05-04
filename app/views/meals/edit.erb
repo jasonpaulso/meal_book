@@ -1,16 +1,30 @@
+<style type="text/css" media="screen">
+  ul {
+   list-style: none;
+   padding-left: 0;
+  }
+  span.space-left {
+    padding-left: 1em;
+  }
+  textarea {
+    width: 30em;
+  }
+  </style>
+<div class="container">
 <form action="/meals/<%=@meal.id%>" method="post">
   <input type="hidden" name="_method" value="patch">
   <label>Meal Name:</label>
   <input type="text" name="meal[name]" value="<%= @meal.name %>"></input>
   <br>
+  <h3>Meal Ingredients:</h3>
   <%@meal.ingredients.uniq.each do |ingredient|%>
-    <label><%=ingredient.name%>: <input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>" checked="checked"></label>
+    <input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>" checked="checked"><%=ingredient.name%>
   <%end%>
   <br>
-  <h3>Choose from Existing Ingredients:</h3>
+  <h3>Add from Existing Ingredients:</h3>
   <ul>
-  <%Ingredient.all.sort.each do |ingredient|%>
-    <li><label><%=ingredient.name.titleize%>: <input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"></label></li>
+  <%Ingredient.all.order("name ASC").each do |ingredient|%>
+    <li><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"><span class="space-left"><%=ingredient.name.titleize%></span></li>
   <%end%>
   </ul>
 <!--   <label>Ingredient: <input type="text" name="ingredient[name_1]" value=""></label>
@@ -18,14 +32,14 @@
   <label>Ingredient: <input type="text" name="ingredient[name_3]" value=""></label>
   <label>Ingredient: <input type="text" name="ingredient[name_4]" value=""></label>
   <label>Ingredient: <input type="text" name="ingredient[name_5]" value=""></label> -->
+  <h3>Create New Ingredients (one per line):</h3><textarea type="text" name="ingredient[text_area]" value=""></textarea>
+  <h3>Description:</h3><textarea type="text" name="meal[description]" value=""></textarea>
   <br>
-  <label>Create New Ingredients (one per line): <br><textarea type="text" name="ingredient[text_area]" value=""></textarea></label><br>
-  <label>Description: <br><textarea type="text" name="meal[description]" value=""></textarea></label>
-  <br>
-  <input type="submit" id="submit" value="submit">
+  <input type="submit" value="submit" class="btn btn-primary"></input>
 </form>
 <br>
 <form action="/meals/<%=@meal.id%>/delete" method="post">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" id="Delete Meal" value="Delete Meal">
+  <input type="submit" id="Delete Meal" value="Delete Meal" class="btn btn-danger">
 </form>
+</div>

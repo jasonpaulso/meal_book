@@ -1,14 +1,30 @@
+<style type="text/css" media="screen">
+  ul {
+   list-style: none;
+   padding-left: 0;
+  }
+  span.space-left {
+    padding-left: 3%;
+  }
+  textarea {
+    width: 50%;
+  }
+  </style>
+<div class="container" class="new-meal">
+
 <h2>Wanna add a new meal?</h2>
 <form action="/meals" method="POST" accept-charset="utf-8">
-  <label>Meal Name: <input type="text" name="meal[name]" value=""></label>
+  <label>Meal Name: <input class="form-name" type="text" name="meal[name]" value=""></label>
   <h3>Choose from Existing Ingredients:</h3>
   <ul>
-  <%Ingredient.all.sort.each do |ingredient|%>
-    <li><label><%=ingredient.name.titleize%>: <input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"></label></li>
+  <%Ingredient.all.order("name ASC").each do |ingredient|%>
+    <li><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"><span class="space-left"><%=ingredient.name.titleize%></span></li>
   <%end%>
   </ul>
-  <label>Create New Ingredients (one per line): <br><textarea type="text" name="ingredient[text_area]" value=""></textarea></label><br>
-  <label>Description: <br><textarea type="text" name="meal[description]" value=""></textarea></label>
+  <h3>Create New Ingredients (one per line): </h3><textarea type="text" name="ingredient[text_area]" value=""></textarea><br>
+  <h3>Description:</h3><textarea type="text" name="meal[description]" value=""></textarea>
   <br>
-  <input type="submit" value="submit">
+  <input type="submit" value="submit" class="btn btn-primary"></input>
 </form>
+</div>
+

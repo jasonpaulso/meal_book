@@ -1,5 +1,83 @@
-<p>Hello and welcome to the MealBook, your personal recipe box and recipe sharing destination.</p>
+<style type="text/css" media="screen">
+  li {
+    list-style: none;
+    text-align: right;
+  }
+  .jumbotron {
+    text-align: center;
+  }
+</style>
+<div class="container">
 
+  <div class="jumbotron">
+    <h1>Hello <%=current_username.titleize%>! <br>Welcome to MealBook!</h1>
+    <p>Your personal recipe box and recipe sharing destination.</p>
+    <%if logged_in? %>
+    <p><a class="btn btn-primary btn-lg" href="/meals/new" role="button">Post a new meal</a></p>
+<!--     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#new-meal">
+      MealPost
+    </button> -->
+    <%else%>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login">
+      Login
+    </button>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#signup">
+      Signup
+    </button>
+    <%end%>
+    <!-- Modals -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><h2>Hungry?</h2></h4>
+          </div>
+          <div class="modal-body">
+
+            <p>Login here:</p>
+            <form action="/users/login" method="POST" accept-charset="utf-8">
+              <label>username: <input type="text" name="username" value=""></label>
+              <label>password: <input type="text" name="password" value=""></label>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" value="submit" class="btn btn-primary"></input>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><h2>Are you new here?</h2></h4>
+          </div>
+          <div class="modal-body">
+
+            <p>Signup is easy! Just create a username and password below.</p>
+            <form action="/users/new" method="POST" accept-charset="utf-8">
+              <label>username: <input type="text" name="username" value=""></label>
+              <label>password: <input type="text" name="password" value=""></label>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" value="submit" class="btn btn-primary"></input>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+        <div class="modal fade" id="new-meal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    </div>
+  </div>
+  <%= erb :"meals/index"%>
+</div>
 
 
 

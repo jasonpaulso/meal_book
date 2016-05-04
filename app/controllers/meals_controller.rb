@@ -106,6 +106,9 @@ class MealsController < ApplicationController
     @meal = duplicate_meal
     redirect to "/meals/#{@meal.id}/edit"
   end
+  get '/meals/' do
+    erb :"/meals/error"
+  end
 
 end
 

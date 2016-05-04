@@ -1,15 +1,40 @@
-<h2><%= @meal.name.titleize %></h2>
-<p>Created By: <%=@meal.username.titleize%></p>
-<p>Updated: <%=@meal.updated_at.strftime("%A, %B %d, %Y")%></p>
-<% @meal.ingredients.uniq.each do |ingredient| %>
-  <ul>
-    <li><%= ingredient.name.titleize%></li>
+<style type="text/css" media="screen">
+  .container {
+    text-align: center;
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+  </style>
+
+
+<div class="container">
+  <h2><%= @meal.name.titleize %></h2>
+  <p>Created By: <a href="/users/<%=@meal.username.downcase%>"><%=@meal.username.titleize%></a></p>
+  <p>Updated: <%=@meal.updated_at.strftime("%A, %B %d, %Y")%></p>
+  <h3>Ingredients</h3>
+  <% @meal.ingredients.uniq.each do |ingredient| %>
+  <ul class="list-group">
+    <li> <a href="/ingredients/<%=ingredient.id%>" class="list-group-item"><%= ingredient.name.titleize%></a></li>
   </ul>
-<% end %>
-<p><%= @meal.description %></p>
-<% if editable? %>
-<a href="/meals/<%=@meal.id%>/edit">Edit Meal</a>
-<%end%>
+  <% end %>
+  <h3>Description</h3>
+  <ul class="list-group">
+    <li class="list-group-item"><p><%= @meal.description %></p></li>
+  </ul>
+
 <% if logged_in?%>
   <a href="/meals/<%=@meal.id%>/duplicate">Duplicate Meal</a>
-  <%end%>
+    <% if editable? %>
+    | 
+      <a href="/meals/<%=@meal.id%>/edit">Edit Meal</a>
+    <%end%>
+<%end%>
+</div>
+
+
+
+
+

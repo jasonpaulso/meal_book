@@ -1,0 +1,29 @@
+<style type="text/css" media="screen">
+  .container {
+    text-align: center;
+  }
+  li {
+    list-style: none;
+    text-align: center;
+  }
+</style>  
+
+
+  <div class="container">
+
+  <h1><%=@user.username.titleize%>'s MealFeed</h1>
+
+  <ul class="list-group">
+  <% @user.meals.order("updated_at DESC").each do |meal|%>
+    <li><h3><a href="\meals\<%=meal.id%>" class="list-group-item"><%= meal.name.titleize %></h3></a>
+      <p>updated: <%=meal.updated_at.strftime("%A, %B %d, %Y")%></p>
+    </li>
+    <%end%>
+  </ul>
+</div>
+
+
+
+
+
+  

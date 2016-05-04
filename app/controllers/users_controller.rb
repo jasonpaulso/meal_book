@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 
   post '/users/new' do
     if new_user
-      redirect to "/meals/index"
+      redirect to "/"
     else
       redirect to "/users/new"
     end
@@ -86,7 +86,7 @@ class UsersController < ApplicationController
 
   get '/users/:slug' do
     @user = find_user_by_slug
-    erb :"/users/user-recipe-box"
+    erb :"/users/show"
   end
 
 end
