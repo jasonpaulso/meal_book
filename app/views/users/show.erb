@@ -13,13 +13,23 @@
 
   <h1><%=@user.username.titleize%>'s MealFeed</h1>
 
-  <ul class="list-group">
-  <% @user.meals.order("updated_at DESC").each do |meal|%>
+  <% if !@user.meals.empty?%>
+    <ul class="list-group">
+    <% @user.meals.order("updated_at DESC").each do |meal|%>
     <li><h3><a href="\meals\<%=meal.id%>" class="list-group-item"><%= meal.name.titleize %></h3></a>
       <p>updated: <%=meal.updated_at.strftime("%A, %B %d, %Y")%></p>
     </li>
     <%end%>
   </ul>
+  <%else%>
+    <%if logged_in? && current_user.id == @user.id%>
+      <h3>You haven't created any meals yet.</h3>
+      <%=erb :'/meals/new'%>
+      <%else%>
+      <h3>This user has not added any meals.</h3>
+      <%=erb :'/meals/index'%>
+      <%end%>
+  <%end%>
 </div>
 
 

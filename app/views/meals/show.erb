@@ -1,19 +1,36 @@
 <style type="text/css" media="screen">
-  .container {
-    text-align: center;
-  }
   ul {
-    list-style: none;
-    padding-left: 0;
-    margin-left: 0;
+   list-style: none;
+   padding-left: 0;
+   width:50%;
+  }
+  span.space-left {
+    padding-left: 1em;
+  }
+  textarea {
+    width: 50%;
+  }
+  span.line {
+    width: 100%;
+    border-bottom: 2px solid black;
+  }
+  input.no-border {
+    border: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
   </style>
 
 
 <div class="container">
   <h2><%= @meal.name.titleize %></h2>
-  <p>Created By: <a href="/users/<%=@meal.username.downcase%>"><%=@meal.username.titleize%></a></p>
+    <p>Created By: <a href="/users/<%=@meal.username.downcase%>"><%=@meal.username.titleize%></a></p>
   <p>Updated: <%=@meal.updated_at.strftime("%A, %B %d, %Y")%></p>
+  <% if logged_in?%>
+  <a href="/meals/<%=@meal.id%>/duplicate">Copy this Meal</a>
+<%end%>
+<%if !logged_in?%>
   <h3>Ingredients</h3>
   <% @meal.ingredients.uniq.each do |ingredient| %>
   <ul class="list-group">
@@ -24,15 +41,11 @@
   <ul class="list-group">
     <li class="list-group-item"><p><%= @meal.description %></p></li>
   </ul>
-
-<% if logged_in?%>
-  <a href="/meals/<%=@meal.id%>/duplicate">Duplicate Meal</a>
-    <% if editable? %>
-    | 
-      <a href="/meals/<%=@meal.id%>/edit">Edit Meal</a>
-    <%end%>
-<%end%>
+  <%end%>
 </div>
+<% if editable? %>
+<%=erb :"/meals/edit"%>
+<%end%>
 
 
 

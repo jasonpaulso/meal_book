@@ -1,11 +1,18 @@
 <style type="text/css" media="screen">
-  li {
-    list-style: none;
-    text-align: right;
-  }
   .jumbotron {
     text-align: center;
+    background-color: white;
+    border:2px solid black;
+    padding: 1em;
   }
+  .signup-button {
+    background-color: green;
+  }
+  .signup-button:hover, .login-button:hover {
+    background-color: beige;
+    color: black;
+  }
+
 </style>
 <div class="container">
 
@@ -19,10 +26,10 @@
     </button> -->
     <%else%>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login">
+    <button type="button" class="btn btn-primary btn-lg login-button" data-toggle="modal" data-target="#login">
       Login
     </button>
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#signup">
+    <button type="button" class="btn btn-primary btn-lg signup-button" data-toggle="modal" data-target="#signup">
       Signup
     </button>
     <%end%>
@@ -38,8 +45,7 @@
 
             <p>Login here:</p>
             <form action="/users/login" method="POST" accept-charset="utf-8">
-              <label>username: <input type="text" name="username" value=""></label>
-              <label>password: <input type="text" name="password" value=""></label>
+              <%=erb :"/users/credentials"%>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <input type="submit" value="submit" class="btn btn-primary"></input>
@@ -61,8 +67,7 @@
 
             <p>Signup is easy! Just create a username and password below.</p>
             <form action="/users/new" method="POST" accept-charset="utf-8">
-              <label>username: <input type="text" name="username" value=""></label>
-              <label>password: <input type="text" name="password" value=""></label>
+              <%=erb :"/users/credentials"%>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <input type="submit" value="submit" class="btn btn-primary"></input>

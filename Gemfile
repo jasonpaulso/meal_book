@@ -13,3 +13,4 @@ gem 'bcrypt'
 gem "tux"
 gem 'string_helpers'
 gem 'deep_cloneable', '~> 2.2.0'
+gem 'sinatra-flash'

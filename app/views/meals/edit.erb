@@ -1,30 +1,22 @@
-<style type="text/css" media="screen">
-  ul {
-   list-style: none;
-   padding-left: 0;
-  }
-  span.space-left {
-    padding-left: 1em;
-  }
-  textarea {
-    width: 30em;
-  }
-  </style>
+
 <div class="container">
 <form action="/meals/<%=@meal.id%>" method="post">
   <input type="hidden" name="_method" value="patch">
-  <label>Meal Name:</label>
-  <input type="text" name="meal[name]" value="<%= @meal.name %>"></input>
+  <ul class="list-group">
+  <label>Edit Name:</label>
+  <li class="list-group-item"><input type="text" name="meal[name]" value="<%= @meal.name %>" class="no-border"></input></li>
   <br>
-  <h3>Meal Ingredients:</h3>
-  <%@meal.ingredients.uniq.each do |ingredient|%>
-    <input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>" checked="checked"><%=ingredient.name%>
+  <h3>Ingredients:</h3>
+  
+  <%@meal.ingredients.all.order("name ASC").each do |ingredient|%>
+    <li class="list-group-item"><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>" checked="checked"><span class="space-left"><%=ingredient.name%></span></li>
   <%end%>
-  <br>
-  <h3>Add from Existing Ingredients:</h3>
-  <ul>
+	  </ul>
+    <ul class="list-group">
   <%Ingredient.all.order("name ASC").each do |ingredient|%>
-    <li><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"><span class="space-left"><%=ingredient.name.titleize%></span></li>
+    <% if !@meal.ingredients.find_by(name:ingredient.name)%>
+    <li class="list-group-item"><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"><span class="space-left"><%=ingredient.name.titleize%></span></li>
+    <%end%>
   <%end%>
   </ul>
 <!--   <label>Ingredient: <input type="text" name="ingredient[name_1]" value=""></label>

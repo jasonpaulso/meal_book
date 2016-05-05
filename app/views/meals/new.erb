@@ -2,6 +2,7 @@
   ul {
    list-style: none;
    padding-left: 0;
+   width: 50%;
   }
   span.space-left {
     padding-left: 3%;
@@ -15,12 +16,14 @@
 <h2>Wanna add a new meal?</h2>
 <form action="/meals" method="POST" accept-charset="utf-8">
   <label>Meal Name: <input class="form-name" type="text" name="meal[name]" value=""></label>
+  <%if !Ingredient.all.empty?%>
   <h3>Choose from Existing Ingredients:</h3>
-  <ul>
+  <ul class="list-group">
   <%Ingredient.all.order("name ASC").each do |ingredient|%>
-    <li><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"><span class="space-left"><%=ingredient.name.titleize%></span></li>
+    <li class="list-group-item"><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"><span class="space-left"><%=ingredient.name.titleize%></span></li>
   <%end%>
   </ul>
+  <%end%>
   <h3>Create New Ingredients (one per line): </h3><textarea type="text" name="ingredient[text_area]" value=""></textarea><br>
   <h3>Description:</h3><textarea type="text" name="meal[description]" value=""></textarea>
   <br>

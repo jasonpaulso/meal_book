@@ -1,61 +1,11 @@
 class MealsController < ApplicationController
 
-    module MealHelpers
-    def all_meals
-      @meals = Meal.all
-    end
-
-    def find_meal
-        Meal.find(params[:id])
-    end
-
-    def new_meal
-      @meal = Meal.create(params[:meal])
-      @meal.description = "No description provided." if params[:meal][:description] == ""
-      current_user.meals << @meal
-      update_or_add_ingredients
-      @meal
-    end
-    def update_meal
-      @meal.update(params[:meal])
-      update_or_add_ingredients
-      @meal.save
-    end
-    
-    def update_or_add_ingredients
-      @ingredients = params[:ingredient]["text_area"].split("\r\n")
-      @ingredients.each do |ingredient|
-        @meal.ingredients << Ingredient.find_or_create_by(name: ingredient.downcase) 
-      end
-    end
-
-    def editable?
-      @meal.user.id == current_user.id && logged_in?
-    end
-
-    def meals_empty?
-      Meal.all.empty?
-    end
-
-    def duplicate_meal
-      @meal = find_meal
-      @new_meal = @meal.deep_clone include: :ingredients
-      @new_meal.user_id = current_user.id
-      @new_meal.name = @meal.name + " (duplicated by #{current_username})"
-      @new_meal.save
-      @new_meal
-    end
-  end
-
-  before do
-    set_title
-  end
-
   get '/meals/new' do
     if logged_in?
       @title = "MealPost"
       erb :"/meals/new"
     else
+      flash[:error] = "You'll need to login or signup if you want to add a meal."
       redirect "/"
     end
   end
@@ -80,14 +30,22 @@ class MealsController < ApplicationController
   end
 
   get '/meals/:id' do 
-    @meal = find_meal
+    if @meal = find_meal
       @title = "#{@meal.name} by #{@meal.username}"
       erb :"/meals/show"
+    else
+      "nope"
+    end
   end
 
   post "/meals" do 
     @meal = new_meal
-    redirect to "/meals/#{@meal.id}"
+    if @meal
+      redirect to "/meals/#{@meal.id}"
+    else
+      flash[:error] = @meal.errors.messages
+      redirect to '/meals/new'
+    end
   end
 
   patch '/meals/:id' do
@@ -106,9 +64,10 @@ class MealsController < ApplicationController
     @meal = duplicate_meal
     redirect to "/meals/#{@meal.id}/edit"
   end
-  get '/meals/' do
+  get '/meals/*' do
     erb :"/meals/error"
   end
+
 
 end
 

@@ -1,4 +1,13 @@
+<style type="text/css" media="screen">
+html {
+  box-sizing: border-box;
+}
+  p.error {
+    text-align: center;
+    background-color: orange;
+  }
 
+</style>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -49,6 +58,19 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<div class="container">
+<%if flash[:error] %>
+  <% unless flash[:error].is_a?(String) %>
+    <% flash[:error].each do |attribute, error| %>
+    <% error.each do |message| %>
+      <p class="error"><%=message%></p>
+    <%end%>
+  <%end%>
+  <%else%>
+  <p class="error"> <%=flash[:error]%></p>
+<%end%>
+<%end%>
+  </div>
 <%= yield %>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

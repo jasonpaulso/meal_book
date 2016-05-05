@@ -1,6 +1,7 @@
 class ApplicationController < Sinatra::Base
-  helpers MealsController::MealHelpers
-  helpers UsersController::UserHelpers
+  helpers MealHelpers
+  helpers UserHelpers
+  register Sinatra::Flash
 
   configure do
     set :public_folder, 'public'
