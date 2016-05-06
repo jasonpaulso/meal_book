@@ -3,8 +3,7 @@
   <% if !@user.meals.empty?%>
   <ul class="list-group centered full-width">
     <% @user.meals.order("updated_at DESC").each do |meal|%>
-    <li><h3><a href="\meals\<%=meal.id%>" class="list-group-item"><%= meal.name.titleize %></h3></a>
-      <p>updated: <%=meal.updated_at.strftime("%A, %B %d, %Y")%></p>
+    <li><h3><a href="\meals\<%=meal.id%>" class="list-group-item"><%= meal.name.titleize %>, updated: <%=meal.updated_at.strftime("%A, %B %d, %Y")%></h3></a>
     </li>
     <%end%>
   </ul>

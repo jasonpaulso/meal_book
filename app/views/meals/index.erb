@@ -1,9 +1,7 @@
 <div class="centered full-width">
   <ul class="list-group full-width">
     <%Meal.order("updated_at DESC").each do |meal|%>
-    <li class="list-group-item"><a href="\meals\<%=meal.id%>" ><%= meal.name.titleize %></a>,
-    created by: <a href="/users/<%=meal.username.downcase%>"><%=meal.username.titleize%></a>,
-    updated: <%=meal.updated_at.strftime("%A, %B %d, %Y")%> 
+    <li><h3><a href="\meals\<%=meal.id%>" class="list-group-item"><%= meal.name.titleize %>, created by: <%=meal.username.titleize%>, updated: <%=meal.updated_at.strftime("%A, %B %d, %Y")%></a></h3>
     </li>
     <%end%>
   </ul>
