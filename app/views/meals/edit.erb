@@ -1,4 +1,5 @@
 <div>
+<h2>Edit <%=@meal.name.titleize%></h2>
   <form action="/meals/<%=@meal.id%>" method="post">
     <input type="hidden" name="_method" value="patch">
     <ul class="list-group">
@@ -8,7 +9,7 @@
       <h3>Ingredients:</h3>
 
       <%@meal.ingredients.all.order("name ASC").each do |ingredient|%>
-      <li class="list-group-item"><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>" checked="checked"><span class="space-left"><%=ingredient.name%></span></li>
+      <li class="list-group-item"><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>" checked="checked"><span class="space-left"><%=ingredient.name.titleize%></span></li>
       <%end%>
     </ul>
     <ul class="list-group">
@@ -18,13 +19,8 @@
       <%end%>
       <%end%>
     </ul>
-    <!--   <label>Ingredient: <input type="text" name="ingredient[name_1]" value=""></label>
-    <label>Ingredient: <input type="text" name="ingredient[name_2]" value=""></label>
-    <label>Ingredient: <input type="text" name="ingredient[name_3]" value=""></label>
-    <label>Ingredient: <input type="text" name="ingredient[name_4]" value=""></label>
-    <label>Ingredient: <input type="text" name="ingredient[name_5]" value=""></label> -->
-    <h3>Create New Ingredients (one per line):</h3><textarea type="text" name="ingredient[text_area]" value=""></textarea>
-    <h3>Description:</h3><textarea type="text" name="meal[description]" value=""></textarea>
+    <h3>Create New Ingredients (one per line):</h3><textarea type="text" name="ingredient[text_area]" value="" class="ingredients"></textarea>
+    <h3>Description:</h3><textarea type="text" name="meal[description]" value="<%=@meal.description%>" class="description"><%=@meal.description%></textarea>
     <br>
     <input type="submit" value="submit" class="btn btn-primary"></input>
   </form>
