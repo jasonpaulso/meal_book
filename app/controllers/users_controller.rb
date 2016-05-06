@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   get '/users/login' do
     @title = "Login"
     if logged_in?
-      redirect to "/meals/index"
+      redirect to "/"
     else 
       erb :"/users/login"
     end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   post '/users/login' do
     @user = find_user
     if authorized?
-      redirect '/meals/index'
+      redirect '/'
     else
       flash[:error] = "The provided login details were invalid. Have you signed up?"
       redirect "/users/new"

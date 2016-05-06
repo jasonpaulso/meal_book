@@ -40,7 +40,7 @@ class MealsController < ApplicationController
 
   post "/meals" do 
     @meal = new_meal
-    if @meal
+    if !@meal.id.nil? 
       redirect to "/meals/#{@meal.id}"
     else
       flash[:error] = @meal.errors.messages

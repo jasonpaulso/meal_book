@@ -1,15 +1,6 @@
-<style type="text/css" media="screen">
-  .container {
-    text-align: center;
-  }
-  li {
-    list-style: none;
-    text-align: center;
-  }
-</style>
-<div class="container">
-<h1>Meals using <%=@ingredient.name.titleize%></h1>
-  <ul class="list-group">
+<div class="centered full-width">
+<h1>Meals containing <%=@ingredient.name.titleize%></h1>
+  <ul class="list-group full-width">
     <% @ingredient.meals.order("updated_at DESC").each do |meal|%>
     <li><h3><a href="\meals\<%=meal.id%>" class="list-group-item"><%= meal.name.titleize %></h3></a>
       <p>updated: <%=meal.updated_at.strftime("%A, %B %d, %Y")%> created by: <a href="/users/<%=meal.username.downcase%>"><%=meal.username%></a></p>

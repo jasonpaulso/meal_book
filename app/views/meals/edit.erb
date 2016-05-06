@@ -1,37 +1,37 @@
-
-<div class="container">
-<form action="/meals/<%=@meal.id%>" method="post">
-  <input type="hidden" name="_method" value="patch">
-  <ul class="list-group">
-  <label>Edit Name:</label>
-  <li class="list-group-item"><input type="text" name="meal[name]" value="<%= @meal.name %>" class="no-border"></input></li>
-  <br>
-  <h3>Ingredients:</h3>
-  
-  <%@meal.ingredients.all.order("name ASC").each do |ingredient|%>
-    <li class="list-group-item"><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>" checked="checked"><span class="space-left"><%=ingredient.name%></span></li>
-  <%end%>
-	  </ul>
+<div>
+  <form action="/meals/<%=@meal.id%>" method="post">
+    <input type="hidden" name="_method" value="patch">
     <ul class="list-group">
-  <%Ingredient.all.order("name ASC").each do |ingredient|%>
-    <% if !@meal.ingredients.find_by(name:ingredient.name)%>
-    <li class="list-group-item"><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"><span class="space-left"><%=ingredient.name.titleize%></span></li>
-    <%end%>
-  <%end%>
-  </ul>
-<!--   <label>Ingredient: <input type="text" name="ingredient[name_1]" value=""></label>
-  <label>Ingredient: <input type="text" name="ingredient[name_2]" value=""></label>
-  <label>Ingredient: <input type="text" name="ingredient[name_3]" value=""></label>
-  <label>Ingredient: <input type="text" name="ingredient[name_4]" value=""></label>
-  <label>Ingredient: <input type="text" name="ingredient[name_5]" value=""></label> -->
-  <h3>Create New Ingredients (one per line):</h3><textarea type="text" name="ingredient[text_area]" value=""></textarea>
-  <h3>Description:</h3><textarea type="text" name="meal[description]" value=""></textarea>
+      <label>Edit Name:</label>
+      <li class="list-group-item"><input type="text" name="meal[name]" value="<%= @meal.name %>" class="no-border"></input></li>
+      <br>
+      <h3>Ingredients:</h3>
+
+      <%@meal.ingredients.all.order("name ASC").each do |ingredient|%>
+      <li class="list-group-item"><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>" checked="checked"><span class="space-left"><%=ingredient.name%></span></li>
+      <%end%>
+    </ul>
+    <ul class="list-group">
+      <%Ingredient.all.order("name ASC").each do |ingredient|%>
+      <% if !@meal.ingredients.find_by(name:ingredient.name)%>
+      <li class="list-group-item"><input type="checkbox" name="meal[ingredient_ids][]" value="<%=ingredient.id%>"><span class="space-left"><%=ingredient.name.titleize%></span></li>
+      <%end%>
+      <%end%>
+    </ul>
+    <!--   <label>Ingredient: <input type="text" name="ingredient[name_1]" value=""></label>
+    <label>Ingredient: <input type="text" name="ingredient[name_2]" value=""></label>
+    <label>Ingredient: <input type="text" name="ingredient[name_3]" value=""></label>
+    <label>Ingredient: <input type="text" name="ingredient[name_4]" value=""></label>
+    <label>Ingredient: <input type="text" name="ingredient[name_5]" value=""></label> -->
+    <h3>Create New Ingredients (one per line):</h3><textarea type="text" name="ingredient[text_area]" value=""></textarea>
+    <h3>Description:</h3><textarea type="text" name="meal[description]" value=""></textarea>
+    <br>
+    <input type="submit" value="submit" class="btn btn-primary"></input>
+  </form>
   <br>
-  <input type="submit" value="submit" class="btn btn-primary"></input>
-</form>
-<br>
-<form action="/meals/<%=@meal.id%>/delete" method="post">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" id="Delete Meal" value="Delete Meal" class="btn btn-danger">
-</form>
+  <form action="/meals/<%=@meal.id%>/delete" method="post">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" id="Delete Meal" value="Delete Meal" class="btn btn-danger">
+  </form>
 </div>
+

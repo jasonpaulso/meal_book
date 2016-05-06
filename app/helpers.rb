@@ -23,11 +23,18 @@ module MealHelpers
   end
 
   def update_or_add_ingredients
-    unless !params[:ingredient]["text_area"].nil?
-      @ingredients = params[:ingredient]["text_area"].downcase!.split("\r\n")
-      @ingredients.each do |ingredient|
-      @meal.ingredients << Ingredient.find_or_create_by(name: ingredient) 
+    if !params[:ingredients].nil?
+      params[:ingredients]["text_area"].reject! {|v| v.empty?}
     end
+    if params[:ingredient]["text_area"] != nil
+      @ingredients = params[:ingredient]["text_area"].split("\r\n")
+      @ingredients.each do |ingredient|
+        @meal.ingredients << Ingredient.find_or_create_by(name: ingredient)
+      end
+    else
+      @ingredients.each do |ingredient|
+        @meal.ingredients << Ingredient.find_or_create_by(name: ingredient) 
+      end
     end
   end
 
@@ -43,7 +50,7 @@ module MealHelpers
     @meal = find_meal
     @new_meal = @meal.deep_clone include: :ingredients
     @new_meal.user_id = current_user.id
-    @new_meal.name = @meal.name + " dup."
+    @new_meal.name = @meal.name + ": copied by #{current_username}"
     @new_meal.save
     @new_meal
   end

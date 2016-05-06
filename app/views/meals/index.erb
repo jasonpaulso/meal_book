@@ -1,15 +1,9 @@
-<style type="text/css" media="screen">
-  li {
-    list-style: none;
-    text-align: center;
-  }
-  }
-</style>
-<div class="container">
-  <ul class="list-group">
+<div class="centered full-width">
+  <ul class="list-group full-width">
     <%Meal.order("updated_at DESC").each do |meal|%>
-    <li class="list-group-item"><a href="\meals\<%=meal.id%>" ><%= meal.name.titleize %></a>
-      updated: <%=meal.updated_at.strftime("%A, %B %d, %Y")%> created by: <a href="/users/<%=meal.username.downcase%>"><%=meal.username%></a>
+    <li class="list-group-item"><a href="\meals\<%=meal.id%>" ><%= meal.name.titleize %></a>,
+    created by: <a href="/users/<%=meal.username.downcase%>"><%=meal.username.titleize%></a>,
+    updated: <%=meal.updated_at.strftime("%A, %B %d, %Y")%> 
     </li>
     <%end%>
   </ul>

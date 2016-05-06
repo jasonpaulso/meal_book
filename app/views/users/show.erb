@@ -1,20 +1,7 @@
-<style type="text/css" media="screen">
-  .container {
-    text-align: center;
-  }
-  li {
-    list-style: none;
-    text-align: center;
-  }
-</style>  
-
-
-  <div class="container">
-
-  <h1><%=@user.username.titleize%>'s MealFeed</h1>
-
+<div>
+  <h1 class="centered"><%=@user.username.titleize%>'s MealFeed</h1>
   <% if !@user.meals.empty?%>
-    <ul class="list-group">
+  <ul class="list-group centered full-width">
     <% @user.meals.order("updated_at DESC").each do |meal|%>
     <li><h3><a href="\meals\<%=meal.id%>" class="list-group-item"><%= meal.name.titleize %></h3></a>
       <p>updated: <%=meal.updated_at.strftime("%A, %B %d, %Y")%></p>
@@ -22,13 +9,13 @@
     <%end%>
   </ul>
   <%else%>
-    <%if logged_in? && current_user.id == @user.id%>
-      <h3>You haven't created any meals yet.</h3>
-      <%=erb :'/meals/new'%>
-      <%else%>
-      <h3>This user has not added any meals.</h3>
-      <%=erb :'/meals/index'%>
-      <%end%>
+  <%if logged_in? && current_user.id == @user.id%>
+  <h3 class="center-title">You haven't created any meals yet.</h3>
+  <%=erb :'/meals/new'%>
+  <%else%>
+  <h3 class="center-title">This user has not added any meals.</h3>
+  <%=erb :'/meals/index'%>
+  <%end%>
   <%end%>
 </div>
 
@@ -36,4 +23,4 @@
 
 
 
-  
+

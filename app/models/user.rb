@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   validates_presence_of :username, message: "You must create a username"
+  validates :username, uniqueness: { case_sensitive: true,  message: "This username has already been taken." }
   validates_presence_of :password, message: "You must create a password"
   has_secure_password validations: false
   has_many :meals
-  validates :username, uniqueness: { case_sensitive: true,  message: "This username has already been taken." }
+  
 
   def slug
     self.username.downcase.slug!

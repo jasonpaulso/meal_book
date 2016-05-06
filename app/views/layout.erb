@@ -6,6 +6,56 @@ html {
     text-align: center;
     background-color: orange;
   }
+  .jumbotron {
+    text-align: center;
+    background-color: white;
+    border:2px solid black;
+    padding: 1em;
+  }
+  .signup-button {
+    background-color: green;
+  }
+  .signup-button:hover, .login-button:hover {
+    background-color: beige;
+    color: black;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    width:50%;
+  }
+  textarea {
+    text-transform: lowercase;
+    width: 50%;
+  }
+  .form-name {
+    width: 50%
+  }
+  button.login-button {
+    background-color: green;
+  }
+   button.grey-hover:hover, input.grey-hover:hover {
+    background-color: grey;
+  }
+/*    button.signup-button:hover {
+    background-color: grey;
+  }*/
+  .centered {
+    text-align: center;
+  }
+  input.no-border {
+    border: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+    span.space-left {
+    padding-left: 1em;
+  }
+  .full-width {
+    width: 100%;
+  }
 
 </style>
 <!DOCTYPE html>
@@ -70,8 +120,9 @@ html {
   <p class="error"> <%=flash[:error]%></p>
 <%end%>
 <%end%>
-  </div>
 <%= yield %>
+  </div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
