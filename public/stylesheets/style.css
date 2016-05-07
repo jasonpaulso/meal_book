@@ -1,0 +1,61 @@
+html {
+  box-sizing: border-box;
+}
+  p.error {
+    text-align: center;
+    background-color: orange;
+  }
+  .jumbotron {
+    text-align: center;
+    background-color: white;
+    border:2px solid black;
+    padding: 1em;
+  }
+  .signup-button {
+    background-color: green;
+  }
+  .signup-button:hover, .login-button:hover {
+    background-color: beige;
+    color: black;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    width:50%;
+  }
+  textarea {
+    width: 50%;
+    height: 10vh;
+  }
+  textarea.ingredients {
+    text-transform: lowercase;
+    
+  }
+  .form-name {
+    width: 50%
+  }
+  button.login-button {
+    background-color: green;
+  }
+   button.grey-hover:hover, input.grey-hover:hover {
+    background-color: grey;
+  }
+/*    button.signup-button:hover {
+    background-color: grey;
+  }*/
+  .centered {
+    text-align: center;
+  }
+  input.no-border {
+    border: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+    span.space-left {
+    padding-left: 1em;
+  }
+  .full-width {
+    width: 100%;
+  }

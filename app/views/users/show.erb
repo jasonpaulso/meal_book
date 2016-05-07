@@ -9,10 +9,10 @@
   </ul>
   <%else%>
   <%if logged_in? && current_user.id == @user.id%>
-  <h3 class="center-title">You haven't created any meals yet.</h3>
+  <h3 class="centered">You haven't created any meals yet.</h3>
   <%=erb :'/meals/new'%>
   <%else%>
-  <h3 class="center-title">This user has not added any meals.</h3>
+  <h3 class="centered">This user has not added any meals.</h3>
   <%=erb :'/meals/index'%>
   <%end%>
   <%end%>
