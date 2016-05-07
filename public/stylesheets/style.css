@@ -35,9 +35,9 @@ html {
   .form-name {
     width: 50%
   }
-  button.login-button {
+ /* button.login-button {
     background-color: green;
-  }
+  }*/
    button.grey-hover:hover, input.grey-hover:hover {
     background-color: grey;
   }
