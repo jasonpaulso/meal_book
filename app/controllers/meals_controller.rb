@@ -23,19 +23,17 @@ class MealsController < ApplicationController
     @meal = find_meal
     @title = "Edit Meal"
     if editable?
-        erb :"/meals/edit"
+      erb :"/meals/edit"
     else
       erb :"/meals/error"
     end
   end
 
   get '/meals/:id' do 
-    if @meal = find_meal
-      @title = "#{@meal.name} by #{@meal.username}"
-      erb :"/meals/show"
-    else
-      "nope"
-    end
+    @meal = find_meal
+    @title = "#{@meal.name} by #{@meal.username}"
+    erb :"/meals/show"
+
   end
 
   post "/meals" do 
@@ -64,6 +62,7 @@ class MealsController < ApplicationController
     @meal = duplicate_meal
     redirect to "/meals/#{@meal.id}/edit"
   end
+  
   get '/meals/*' do
     erb :"/meals/error"
   end
