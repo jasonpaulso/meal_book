@@ -11,7 +11,7 @@ module MealHelpers
 
   def new_meal
     @meal = Meal.create(params[:meal])
-    @meal.description = "No description provided." if params[:meal][:description] == ""
+    @meal.description = "No description provided." if params[:meal][:description] == "" || params[:meal][:description] == nil
     current_user.meals << @meal
     update_or_add_ingredients
     @meal
