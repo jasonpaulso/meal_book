@@ -1,5 +1,5 @@
 # MealBook
-
+ An app for storing and sharing recipes and meal ideas.
 #Instructions
 <ul>
 <li>Clone the repo to your local environment.</li>
