@@ -21,6 +21,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get('/') {@title = "Home"; erb :index}
-  get('/nav') {erb :"nav"}
+
 
 end
