@@ -18,7 +18,8 @@ class UsersController < ApplicationController
   end
 
   post '/users/new' do
-    @user = new_user
+    @user = User.create(params)
+    login(@user.id) if @user.save
     unless @user.errors
       redirect to "/"
     else
@@ -30,6 +31,7 @@ class UsersController < ApplicationController
   post '/users/login' do
     @user = find_user
     if authorized?
+      login(@user.id) 
       redirect '/'
     else
       flash[:error] = "The provided login details were invalid. Have you signed up?"
@@ -41,6 +43,7 @@ class UsersController < ApplicationController
 
   get '/users/:slug' do
     @user = find_user_by_slug
+    @title = @user.username
     erb :"/users/show"
   end
 

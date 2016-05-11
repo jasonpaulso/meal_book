@@ -37,7 +37,10 @@ class MealsController < ApplicationController
   end
 
   post "/meals" do 
-    @meal = new_meal
+    @meal = Meal.new(params[:meal])
+    update_or_add_ingredients
+    @meal.save
+    current_user.meals << @meal
     if !@meal.id.nil? 
       redirect to "/meals/#{@meal.id}"
     else
@@ -48,7 +51,9 @@ class MealsController < ApplicationController
 
   patch '/meals/:id' do
     @meal = find_meal
-    update_meal
+    @meal.update(params[:meal])
+    update_or_add_ingredients
+    @meal.save
     redirect "/meals/#{@meal.id}"
   end
 

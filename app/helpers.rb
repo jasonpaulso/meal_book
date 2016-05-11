@@ -9,31 +9,18 @@ module MealHelpers
     end
   end
 
-  def new_meal
-    @meal = Meal.create(params[:meal])
-    @meal.description = "No description provided." if params[:meal][:description] == "" || params[:meal][:description] == nil
-    current_user.meals << @meal
-    update_or_add_ingredients
-    @meal
-  end
-  def update_meal
-    @meal.update(params[:meal])
-    update_or_add_ingredients
-    @meal.save
-  end
-
   def update_or_add_ingredients
     if !params[:ingredients].nil?
       params[:ingredients]["text_area"].reject! {|v| v.empty?}
     end
-    if params[:ingredient]["text_area"] != nil
+    if params[:ingredient]["text_area"] != "" || params[:ingredient]["text_area"] != nil
       @ingredients = params[:ingredient]["text_area"].split("\r\n")
       @ingredients.each do |ingredient|
-        @meal.ingredients << Ingredient.find_or_create_by(name: ingredient)
-      end
-    else
-      @ingredients.each do |ingredient|
-        @meal.ingredients << Ingredient.find_or_create_by(name: ingredient) 
+        if Ingredient.find_by(name: ingredient)
+          @meal.ingredients << Ingredient.find_by(name: ingredient)
+        else
+          @meal.ingredients << Ingredient.create(name: ingredient)
+        end
       end
     end
   end
@@ -61,14 +48,7 @@ module UserHelpers
     User.find_by(username: params[:username])
   end
   def authorized?
-    login(@user.id) if @user && @user.authenticate(params[:password])
-    session[:user_id]
-  end
-
-  def new_user
-    @user = User.create(params)
-    login(@user.id) if @user.save
-    @user
+    @user && @user.authenticate(params[:password])
   end
 
   def current_user
